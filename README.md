@@ -30,8 +30,10 @@ and hit 'Enter'
 
 <br />
 <br />
-
-In the appsettings.json, please change api_url just in case the PizzaPlaceAPI url has been changed
+CSV files for download and to be used for Importation: https://www.kaggle.com/datasets/mysarahmadbhat/pizza-place-sales
+<br />
+<br />
+In the appsettings.json, please change api_url just in case the PizzaPlaceAPI url had been changed
 
 Please make sure that PizzaPlaceAPI project is running in order for the Imports and Data retrieval to work.
 
