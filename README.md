@@ -37,8 +37,8 @@ Please make sure that PizzaPlaceAPI project is running in order for the Imports 
 
 <br />
 <br />
-1. The CSV file names are the same as the API controller name
-   - pizzas > api/pizzas
-   - orders > api/orders
-   - order_details > api/orderdetails (the _ is removed)
+1. The CSV file names are the same as the API controller name<br />
+   - pizzas > api/pizzas<br />
+   - orders > api/orders<br />
+   - order_details > api/orderdetails (the _ is removed)<br />
    - pizza_types > api/pizzatypes (the _ is removed)
