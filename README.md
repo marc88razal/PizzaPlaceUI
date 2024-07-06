@@ -34,3 +34,11 @@ and hit 'Enter'
 In the appsettings.json, please change api_url just in case the PizzaPlaceAPI url has been changed
 
 Please make sure that PizzaPlaceAPI project is running in order for the Imports and Data retrieval to work.
+
+<br />
+<br />
+1. The CSV file names are the same as the API controller name
+   - pizzas > api/pizzas
+   - orders > api/orders
+   - order_details > api/orderdetails (the _ is removed)
+   - pizza_types > api/pizzatypes (the _ is removed)
