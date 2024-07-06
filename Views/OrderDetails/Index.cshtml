@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Order Details";
+    string errorMessage = ViewData["AppMessage"] == null ? "" : ViewData["AppMessage"].ToString();
+    List<OrderDetailsModel.OrderDetailsDisplay> orderDetails = (List<OrderDetailsModel.OrderDetailsDisplay>)ViewData["OrderDetails"];
+}
+
+<h1>Order Details</h1>
+
+<div class="text-center">
+    <span class="subtitle-page">Import CSV files</span>
+    <form enctype="multipart/form-data" method="post" asp-controller="OrderDetails" asp-action="UploadFile">
+        <div>
+            <label id="uploadFile" name="uploadFile" disabled="disabled" class="inputtext" style="width: 250px; border: 1px solid rgba(218, 223, 225)">Choose File</label>
+            <label class="btn btn-primary" id="lblbtnupload">
+                <div id="btnSelect">
+                    <i class="fa fa-folder"></i> Select File<input type="file" name="file" style="display: none;" id="selectBtn" accept=".csv">
+                </div>
+            </label>
+            <input id="btnUpload" type="submit" value="Upload" class="btn btn-primary" disabled="disabled" />
+        </div>
+
+    </form>
+    <span id="appMessage" style="color: red">
+        @errorMessage
+    </span>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    var errorMessage = $("#appMessage");
+    $('#selectBtn').change(function (e) {
+        var file = e.target.files[0],
+            fileName = e.target.files[0].name,
+            fileinfo = fileName.split('.')
+        document.getElementById("uploadFile").innerHTML = fileName;
+
+        if (fileinfo[1] != 'csv') {
+            return false;
+        }
+        else {
+            errorMessage.html("");
+            $("#btnUpload").prop("disabled", false);
+        }
+        //UploadCsv();
+    });
+
+</script>
+<table class="table">
+    <tr>
+        <th class="text-left">order_details_id</th>
+        <th class="text-left">order_id</th>
+        <th class="text-left">pizza_id</th>
+        <th class="text-left">quantity</th>
+    </tr>
+    @if (orderDetails != null && orderDetails.Count() > 0)
+    {
+        foreach (var item in orderDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order_details_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pizza_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+            </tr>
+        }
+    }
+</table>

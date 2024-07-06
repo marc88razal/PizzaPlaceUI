@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Pizza Types";
+    string errorMessage = ViewData["AppMessage"] == null ? "" : ViewData["AppMessage"].ToString();
+    List<PizzaTypesModel.PizzaTypesDisplay> pizzaTypes = (List<PizzaTypesModel.PizzaTypesDisplay>)ViewData["PizzaTypes"];
+}
+
+<h1>Pizza Types</h1>
+
+<div class="text-center">
+    <span class="subtitle-page">Import CSV files</span>
+    <form enctype="multipart/form-data" method="post" asp-controller="PizzaTypes" asp-action="UploadFile">
+        <div>
+            <label id="uploadFile" name="uploadFile" disabled="disabled" class="inputtext" style="width: 250px; border: 1px solid rgba(218, 223, 225)">Choose File</label>
+            <label class="btn btn-primary" id="lblbtnupload">
+                <div id="btnSelect">
+                    <i class="fa fa-folder"></i> Select File<input type="file" name="file" style="display: none;" id="selectBtn" accept=".csv">
+                </div>
+            </label>
+            <input id="btnUpload" type="submit" value="Upload" class="btn btn-primary" disabled="disabled" />
+        </div>
+
+    </form>
+    <span id="appMessage" style="color: red">
+        @errorMessage
+    </span>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    var errorMessage = $("#appMessage");
+    $('#selectBtn').change(function (e) {
+        var file = e.target.files[0],
+            fileName = e.target.files[0].name,
+            fileinfo = fileName.split('.')
+        document.getElementById("uploadFile").innerHTML = fileName;
+
+        if (fileinfo[1] != 'csv') {
+            return false;
+        }
+        else {
+            errorMessage.html("");
+            $("#btnUpload").prop("disabled", false);
+        }
+        //UploadCsv();
+    });
+
+</script>
+<table class="table">
+    <tr>
+        <th class="text-left">pizza_type_id</th>
+        <th class="text-left">name</th>
+        <th class="text-left">category</th>
+        <th class="text-left">ingredients</th>
+    </tr>
+    @if (pizzaTypes != null && pizzaTypes.Count() > 0)
+    {
+        foreach (var item in pizzaTypes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pizza_type_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ingredients)
+                </td>
+            </tr>
+        }
+    }
+</table>
